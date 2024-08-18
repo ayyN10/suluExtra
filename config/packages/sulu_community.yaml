@@ -1,0 +1,111 @@
+# config/packages/sulu_community.yaml
+
+sulu_community:
+    last_login:
+        enabled: false
+        refresh_interval: 600
+    webspaces:
+        extranet: # Replace <webspace_key> with the key of your webspace
+            from:
+                name: "%sulu_admin.email%"
+                email: "%sulu_admin.email%"
+            role: ExtranetUser
+            firewall: extranet
+            # Maintenance
+            maintenance:
+                enabled: false
+                template: '@SuluCommunity/maintenance.html.twig'
+            # Login
+            login:
+                embed_template: '@SuluCommunity/login-embed.html.twig'
+                template: '@SuluCommunity/login.html.twig'
+
+            # Registration
+            registration:
+                activate_user: false
+                auto_login: true # only available when activate_user is true
+                email:
+                    subject: Registration
+                    user_template: '@SuluCommunity/registration-email.html.twig'
+                    admin_template: ~
+                redirect_to: ?send=true
+                template: '@SuluCommunity/registration-form.html.twig'
+                type: Sulu\Bundle\CommunityBundle\Form\Type\RegistrationType
+
+            # Confirmation
+            confirmation:
+                activate_user: true
+                auto_login: true
+                email:
+                    subject: Confirmation
+                    user_template: ~
+                    admin_template: ~
+                redirect_to: ~
+                template: '@SuluCommunity/confirmation-message.html.twig'
+
+            # Completion
+            completion:
+                email:
+                    subject: Completion
+                    user_template: ~
+                    admin_template: ~
+                redirect_to: /
+                service: ~
+                template: '@SuluCommunity/completion-form.html.twig'
+                type: Sulu\Bundle\CommunityBundle\Form\Type\CompletionType
+
+            # Password Forget / Reset
+            password_forget:
+                email:
+                    subject: Password Forget
+                    admin_template: ~
+                    user_template: '@SuluCommunity/password-forget-email.html.twig'
+                redirect_to: ?send=true
+                template: '@SuluCommunity/password-forget-form.html.twig'
+                type: Sulu\Bundle\CommunityBundle\Form\Type\PasswordForgetType
+            password_reset:
+                auto_login: true
+                email:
+                    subject: Password Reset
+                    admin_template: ~
+                    user_template: '@SuluCommunity/password-reset-email.html.twig'
+                redirect_to: ?send=true
+                template: '@SuluCommunity/reset-form.html.twig'
+                type: Sulu\Bundle\CommunityBundle\Form\Type\PasswordResetType
+
+            # Profile
+            profile:
+                email:
+                    subject: Profile Updated
+                    user_template: ~
+                    admin_template: ~
+                redirect_to: ~
+                template: '@SuluCommunity/profile-form.html.twig'
+                type: Sulu\Bundle\CommunityBundle\Form\Type\ProfileType
+
+            # Email Confirmation
+            email_confirmation:
+                email:
+                    subject: Email Changed
+                    user_template: '@SuluCommunity/email-confirmation-email.html.twig'
+                    admin_template: ~
+                template: '@SuluCommunity/email-confirmation-success.html.twig'
+
+            # Blacklist
+            blacklisted:
+                email:
+                    subject: Blacklisted
+                    admin_template: '@SuluCommunity/blacklist-email.html.twig'
+                    user_template: ~
+            blacklist_denied:
+                email:
+                    subject: Denied
+                    admin_template: ~
+                    user_template: ~
+                template: '@SuluCommunity/blacklist-denied.html.twig'
+            blacklist_confirmed:
+                email:
+                    subject: Registration
+                    admin_template: ~
+                    user_template: '@SuluCommunity/registration-email.html.twig'
+                template: '@SuluCommunity/blacklist-confirmed.html.twig'

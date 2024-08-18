@@ -46,7 +46,19 @@ security:
                 authentication_required_handler: sulu_security.two_factor_authentication_required_handler
                 success_handler: sulu_security.two_factor_authentication_success_handler
                 failure_handler: sulu_security.two_factor_authentication_failure_handler
-
+        extranet:
+                pattern: ^/
+                lazy: true
+                form_login:
+                    login_path: sulu_community.login
+                    check_path: sulu_community.login
+                logout:
+                    path: sulu_community.logout
+                    target: /
+                remember_me:
+                    secret: "%kernel.secret%"
+                    lifetime: 604800 # 1 week in seconds
+                    path: /
        #website:
        #    pattern: ^/
        #    lazy: true
